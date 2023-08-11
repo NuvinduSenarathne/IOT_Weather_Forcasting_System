@@ -1,0 +1,346 @@
+[
+    {
+        "id": "cc93fe52777c4b6c",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c4ae9ba4def96939",
+        "type": "inject",
+        "z": "cc93fe52777c4b6c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 160,
+        "wires": [
+            [
+                "96436bb93bf48b08"
+            ]
+        ]
+    },
+    {
+        "id": "ea8c75c3f4a8801a",
+        "type": "debug",
+        "z": "cc93fe52777c4b6c",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "32d3d9f2668f3921",
+        "type": "function",
+        "z": "cc93fe52777c4b6c",
+        "name": "function 3",
+        "func": "var payload = msg.payload;\n//var Data = \"2020-08-8\".split(\"-\");\n//Data = Data[2]+\"/\"+Data[1]+\"/\"+Data[0];\n//node.log(Data);\n//var t = toTimestamp(Data+\"14:30:00\");\nvar data_out = [];\nvar a1 = [];\n//var a2 = [];\n\n\n\nfor (let i = 0; i < payload.length; i++) {\n    //Data=payload[i].Data.split(\"/\");\n    //t = Data[2] + \"/\" + Data[1] + \"/\" + Data[0];\n    //var timestamp = toTimestamp(t+\" \"+payload[i][\"Godzina\"]);\n    var dt = [];\n\n\n\n    var temp1 = { \"x\": payload[i][\"Date\"], \"y\": parseFloat(payload[i][\"Predicted Humidity\"]) };\n    //var temp2 = { \"x\": dt, \"y\": parseInt(payload[i][\"RH\"]) };\n\n\n\n    a1.push(temp1);\n    //a2.push(temp2);\n}\n\n\n\ndata_out = [a1];\nmsg.payload = [{\n    \"series\": [\"Predicted Humidity\"],\n    \"data\": data_out,\n    \"labels\": [\"predicted humidity(change this)\"]\n}];\n//msg.dt=dt;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 420,
+        "wires": [
+            [
+                "ea8c75c3f4a8801a",
+                "15fef48a9b3a78ab"
+            ]
+        ]
+    },
+    {
+        "id": "96436bb93bf48b08",
+        "type": "file in",
+        "z": "cc93fe52777c4b6c",
+        "name": "read",
+        "filename": "D:\\SLIIT\\YEAR 4\\IoT\\dataset\\PastData.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "1dca9a3a9309bf42"
+            ]
+        ]
+    },
+    {
+        "id": "1dca9a3a9309bf42",
+        "type": "csv",
+        "z": "cc93fe52777c4b6c",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 570,
+        "y": 320,
+        "wires": [
+            [
+                "32d3d9f2668f3921"
+            ]
+        ]
+    },
+    {
+        "id": "15fef48a9b3a78ab",
+        "type": "ui_chart",
+        "z": "cc93fe52777c4b6c",
+        "name": "",
+        "group": "f29a66e4434a0f29",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Predicted Past Data",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "45",
+        "ymax": "90",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1040,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "741cdc16c634b6e1",
+        "type": "inject",
+        "z": "cc93fe52777c4b6c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 620,
+        "wires": [
+            [
+                "f9411a6dae3b6a64"
+            ]
+        ]
+    },
+    {
+        "id": "23eadc47ef1f0bf3",
+        "type": "debug",
+        "z": "cc93fe52777c4b6c",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "db006be0f78ca32d",
+        "type": "function",
+        "z": "cc93fe52777c4b6c",
+        "name": "function 4",
+        "func": "var payload = msg.payload;\n//var Data = \"2020-08-8\".split(\"-\");\n//Data = Data[2]+\"/\"+Data[1]+\"/\"+Data[0];\n//node.log(Data);\n//var t = toTimestamp(Data+\"14:30:00\");\nvar data_out = [];\nvar a1 = [];\n//var a2 = [];\n\n\n\nfor (let i = 0; i < payload.length; i++) {\n    //Data=payload[i].Data.split(\"/\");\n    //t = Data[2] + \"/\" + Data[1] + \"/\" + Data[0];\n    //var timestamp = toTimestamp(t+\" \"+payload[i][\"Godzina\"]);\n    var dt = [];\n\n\n\n    var temp1 = { \"x\": payload[i][\"Date\"], \"y\": parseFloat(payload[i][\"Forecast\"]) };\n    //var temp2 = { \"x\": dt, \"y\": parseInt(payload[i][\"RH\"]) };\n\n\n\n    a1.push(temp1);\n    //a2.push(temp2);\n}\n\n\n\ndata_out = [a1];\nmsg.payload = [{\n    \"series\": [\"Forecast\"],\n    \"data\": data_out,\n    \"labels\": [\"forecast(change this)\"]\n}];\n//msg.dt=dt;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 880,
+        "wires": [
+            [
+                "23eadc47ef1f0bf3",
+                "518f01423648f1a8"
+            ]
+        ]
+    },
+    {
+        "id": "f9411a6dae3b6a64",
+        "type": "file in",
+        "z": "cc93fe52777c4b6c",
+        "name": "read",
+        "filename": "D:\\SLIIT\\YEAR 4\\IoT\\FutureData.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 530,
+        "y": 700,
+        "wires": [
+            [
+                "ca4c37188fbc1e4d"
+            ]
+        ]
+    },
+    {
+        "id": "ca4c37188fbc1e4d",
+        "type": "csv",
+        "z": "cc93fe52777c4b6c",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 650,
+        "y": 780,
+        "wires": [
+            [
+                "db006be0f78ca32d"
+            ]
+        ]
+    },
+    {
+        "id": "518f01423648f1a8",
+        "type": "ui_chart",
+        "z": "cc93fe52777c4b6c",
+        "name": "",
+        "group": "7e4a66270e4ec7aa",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Future Predicted ",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "Y-M-D",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "45",
+        "ymax": "90",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1110,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f29a66e4434a0f29",
+        "type": "ui_group",
+        "name": "past predicted",
+        "tab": "775aaa535123d764",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7e4a66270e4ec7aa",
+        "type": "ui_group",
+        "name": "predicted future",
+        "tab": "775aaa535123d764",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "775aaa535123d764",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

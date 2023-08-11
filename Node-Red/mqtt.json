@@ -1,0 +1,248 @@
+[
+    {
+        "id": "bb821ec69c18e26e",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9a4fe0fac073c654",
+        "type": "mqtt out",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "topic": "nuviDev/feeds/Humidity",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e67b8abe4332656d",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ca90aca950fdce29",
+        "type": "inject",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "nuviDev/feeds/Humidity",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 160,
+        "wires": [
+            [
+                "9a4fe0fac073c654"
+            ]
+        ]
+    },
+    {
+        "id": "8aa94d8e261d14df",
+        "type": "inject",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "nuviDev/feeds/Temperature",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 260,
+        "wires": [
+            [
+                "6254a2ac2b1f214d"
+            ]
+        ]
+    },
+    {
+        "id": "6254a2ac2b1f214d",
+        "type": "mqtt out",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "topic": "nuviDev/feeds/Temperature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e67b8abe4332656d",
+        "x": 640,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "4c1646657810f49b",
+        "type": "ui_gauge",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "group": "101388d44e6a21d7",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "150",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1040,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1bd8da073d3ce4a8",
+        "type": "mqtt in",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "topic": "nuviDev/feeds/Humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "e67b8abe4332656d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 860,
+        "y": 160,
+        "wires": [
+            [
+                "4c1646657810f49b"
+            ]
+        ]
+    },
+    {
+        "id": "080c86193d399fb2",
+        "type": "mqtt in",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "topic": "nuviDev/feeds/Temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "e67b8abe4332656d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 920,
+        "y": 260,
+        "wires": [
+            [
+                "72de7de866dcd601"
+            ]
+        ]
+    },
+    {
+        "id": "72de7de866dcd601",
+        "type": "ui_gauge",
+        "z": "bb821ec69c18e26e",
+        "name": "",
+        "group": "101388d44e6a21d7",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "60",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1150,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e67b8abe4332656d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "io.adafruit.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "101388d44e6a21d7",
+        "type": "ui_group",
+        "name": "Guage",
+        "tab": "775aaa535123d764",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "775aaa535123d764",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
